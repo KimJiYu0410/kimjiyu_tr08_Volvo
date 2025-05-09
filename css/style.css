@@ -1,0 +1,794 @@
+/* 공통 변수 선언 (색상 테마 정의) */
+
+:root {
+    --primary-color: #1c6eba;
+    --secondary-color: #bababa;
+
+    --body-color: #333333;
+
+    --line-color: #dddddd;
+    --white-color: #ffffff;
+    --background-color: #f7f7f7;
+}
+
+/* 전체 폰트 사이즈 기준 설정 (10px = 1rem) */
+html {
+    font-size: 62.5%;
+}
+
+/* 기본 텍스트 설정 */
+body {
+    font-size: 1.6rem;
+    color: var(--body-color);
+}
+
+/* ================= HEADER ================= */
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25)
+}
+
+/* 스크롤 시 활성화 클래스 */
+#header.on {
+    background: var(--white-color);
+    border-bottom: 1px solid var(--line-color);
+}
+
+/* 헤더 내부 정렬 */
+#header .hd_wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 로고 설정 */
+#header h1 a {
+    display: flex;
+}
+
+#header h1 a img {
+    height: 1.5rem;
+}
+
+/* on 상태일 때 로고 반전 */
+#header.on h1 a img:nth-child(2) {
+    filter: invert();
+}
+
+/* GNB (메인 네비게이션) 설정 */
+#header .gnb>ul {
+    display: flex;
+    gap: 4rem;
+}
+
+#header a {
+    white-space: nowrap;
+}
+
+/* GNB 링크 기본 스타일 */
+#header .gnb>ul>li>a {
+    display: block;
+    line-height: 12rem;
+    font-size: 1.8rem;
+    color: var(--white-color);
+
+    transition: line-height 0.4s;
+}
+
+/* 헤더 활성화 시 스타일 변경 */
+#header.on .gnb>ul>li>a {
+    line-height: 8rem;
+    color: var(--body-color);
+}
+
+#header .gnb>ul>li {
+    position: relative;
+}
+
+/* GNB 하위 메뉴 (드롭다운) */
+#header .gnb>ul>li ul {
+    position: absolute;
+    top: auto;
+    left: 50%;
+
+    padding: 1.6rem 0;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, 0);
+
+    background: var(--white-color);
+    border-radius: 8px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+
+    transition: 0.4s;
+}
+
+/* 호버 및 포커스 시 하위 메뉴 표시 */
+#header .gnb>ul>li:hover ul {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -12px);
+}
+
+#header .gnb>ul>li:focus-within ul {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -12px);
+}
+
+/* 하위 메뉴 항목 스타일 */
+#header .gnb>ul>li ul a {
+    display: block;
+    line-height: 4rem;
+    padding: 0 4rem;
+    text-align: center;
+}
+
+/* #header .gnb>ul>li ul li~li a {
+    border-top: 1px solid var(--line-color);
+} */
+
+/* 유틸 메뉴 */
+#header .utils {
+    display: flex;
+    gap: 2.4rem;
+}
+
+#header .utils a {
+    position: relative;
+    color: var(--white-color);
+}
+
+#header.on .utils a {
+    color: var(--body-color);
+}
+
+/* 유틸 항목 간 구분 점 */
+#header .utils a~a::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -13px;
+    width: 2px;
+    height: 2px;
+    background: var(--white-color);
+
+    transform: translate(0, -50%);
+}
+
+#header.on .utils a~a::before {
+    background: var(--body-color);
+}
+
+/* ================= MAIN VISUAL ================= */
+.main_visual {
+    position: relative;
+}
+
+/* 메인 슬라이드 둥근 모서리 설정 */
+.main_visual .main_visual_slide {
+    border-radius: 0 0 16rem 0;
+    /* overflow: hidden; */
+}
+
+/* 슬라이드 항목 기본 */
+.main_visual .main_visual_slide .itm {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 배경 이미지 설정 */
+.main_visual .main_visual_slide .itm .bg {
+    position: absolute;
+    inset: 0 0 0 0;
+}
+
+.main_visual .main_visual_slide .itm01 .bg {
+    background: url(../images/img_visual01.jpg) no-repeat center center/cover;
+}
+
+.main_visual .main_visual_slide .itm02 .bg {
+    background: url(../images/img_visual02.jpg) no-repeat center center/cover;
+}
+
+/* 슬라이드 화살표 영역 */
+.main_visual .arrows {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+
+    max-width: 160rem;
+    width: 100%;
+
+    transform: translate(-50%, -50%);
+
+    transition: 0.4s;
+}
+
+/* 슬라이드 영역에 마우스 올릴 때 너비 줄어듦 */
+.main_visual:hover .arrows {
+    max-width: 141rem;
+}
+
+/* 이전/다음 버튼 공통 스타일 */
+.main_visual .arrows button {
+    position: absolute;
+    top: 0;
+    width: 8rem;
+    height: 8rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+
+    transform: translate(0, -50%);
+}
+
+/* 이전/다음 버튼-양쪽 버튼 화살표 이미지 변경*/
+.main_visual .arrows .prev {
+    left: 0;
+}
+
+.main_visual .arrows .prev {
+    left: 0;
+
+    background: url(../images/new_logo_1_off.png) no-repeat center center/60px;
+
+    transition: 1s;
+}
+
+.main_visual .arrows .prev:hover {
+    left: 0;
+
+    background: url(../images/new_logo_1_on.png) no-repeat center center/60px;
+}
+
+.main_visual .arrows .next {
+    right: 0;
+
+    background: url(../images/new_logo_off.png) no-repeat center center/60px;
+
+    transition: 1s;
+}
+
+.main_visual .arrows .next:hover {
+    right: 0;
+
+    background: url(../images/new_logo_on.png) no-repeat center center/60px;
+
+}
+
+/* 중앙 문구 (슬로건) */
+.main_visual .slg {
+    position: absolute;
+
+    left: 50%;
+    bottom: 8rem;
+    transform: translate(-50%, 0);
+
+    max-width: 141rem;
+    width: 100%;
+
+
+
+}
+
+/* 슬로건 텍스트 스타일 */
+.main_visual .slg p {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    color: var(--white-color);
+    font-size: 6rem;
+    font-weight: 500;
+    line-height: 2.4rem;
+
+
+}
+
+/* 스크롤 안내 아이콘 스타일 */
+.main_visual .scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    z-index: 2;
+
+    transform: translate(-50%, 0);
+}
+
+/* 링크 랩(버튼) */
+.main_visual .lnk_wrap {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    z-index: 2;
+
+    transform: translate(-50%, 0);
+
+    max-width: 141rem;
+    width: 100%;
+}
+
+
+/* 메인 정보 영역 */
+.main_info {}
+
+.main_info .inner>* {
+    padding: 7.2rem;
+}
+
+/* 왼쪽 영역 배경 이미지 설정 */
+.main_info .inner .left {
+    background: var(--background-color) url(../images/img_Model01.png) no-repeat right bottom / 450px;
+    border-radius: 3.6rem;
+}
+
+/* 왼쪽 영역의 하단 여백 */
+.main_info .inner .left p {
+    margin-bottom: 8rem;
+}
+
+/* 기본 버튼 스타일 */
+.main_info .inner .left .default_btn {
+    height: 6.4rem;
+}
+
+/* 오른쪽 영역 연락처 스타일 */
+.main_info .inner .right .contact {
+    display: flex;
+    align-items: center;
+    margin-top: 3.2rem;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px dashed var(--line-color);
+}
+
+/* 연락처 아이콘 스타일 */
+.main_info .inner .right .contact i {
+    margin-right: auto;
+    padding: 1.6rem;
+    background: var(--line-color);
+    border-radius: 50%;
+}
+
+/* 연락처 텍스트 스타일 */
+.main_info .inner .right .contact strong {
+    font-size: 4rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* 연락처 링크 스타일 */
+.main_info .inner .right .contact .lnk {
+    margin-left: 3.2rem;
+    padding: 0 1.6rem;
+    height: 4rem;
+    line-height: 4rem;
+    background: var(--body-color);
+    color: var(--white-color);
+    font-size: 1.4rem;
+    border-radius: 2rem;
+    white-space: nowrap;
+}
+
+/* 오른쪽 영역 설명 텍스트 스타일 */
+.main_info .inner .right .desc {
+    margin-top: 2.4rem;
+}
+
+/* 설명 항목 스타일 */
+.main_info .inner .right .desc li {
+    display: flex;
+    gap: 4rem;
+
+    margin-bottom: 0.8rem;
+}
+
+/* 설명 항목 제목 스타일 */
+.main_info .inner .right .desc li strong {
+    flex: 0 0 8rem;
+    font-weight: 700;
+    position: relative;
+    line-height: 1.5;
+}
+
+/* 설명 항목 내용 스타일 */
+.main_info .inner .right .desc li p {
+    flex: 1;
+    text-align: justify;
+}
+
+/* 고객 섹션 */
+.main_customer {}
+
+/* 고객 섹션 내의 요소들이 플렉스박스 레이아웃으로 배치됨 */
+.main_customer .w_inner {
+    display: flex;
+}
+
+/* 왼쪽 영역 스타일 */
+.main_customer .w_inner .left {
+    flex: 1;
+    padding-top: 5.6rem;
+}
+
+/* 왼쪽 영역 내의 콘텐츠 영역 */
+.main_customer .w_inner .left .cont {
+    display: flex;
+    gap: 8px;
+
+    margin-top: 4rem;
+}
+
+/* 왼쪽 영역 내 버튼 스타일 */
+.main_customer .w_inner .left .cont button {
+    background: var(--body-color);
+    font-size: 0;
+
+    width: 5.6rem;
+    height: 5.6rem;
+
+    border-radius: 50%;
+}
+
+/* 왼쪽 영역의 이전 버튼 스타일 */
+.main_customer .w_inner .left .cont .prev {
+    background: var(--body-color) url(../images/arrow-left.svg) no-repeat center center;
+}
+
+/* 왼쪽 영역의 다음 버튼 스타일 */
+.main_customer .w_inner .left .cont .next {
+    background: var(--body-color) url(../images/arrow-right.svg) no-repeat center center;
+}
+
+/* 왼쪽 영역의 플레이 버튼 스타일 */
+.main_customer .w_inner .left .cont .play {
+    background: var(--body-color) url(../images/play.svg) no-repeat center center/24px;
+}
+
+/* 왼쪽 영역의 플레이 버튼 상태 변경 */
+.main_customer .w_inner .left .cont .play.on {
+    background: var(--body-color) url(../images/pause.svg) no-repeat center center/24px;
+}
+
+/* 오른쪽 영역 스타일 */
+.main_customer .w_inner .right {
+    position: relative;
+    flex: 2;
+    /* overflow: hidden; */
+    min-width: 0;
+}
+
+/* 오른쪽 영역의 원형 장식 스타일 */
+.main_customer .w_inner .right::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 24rem;
+    height: 24rem;
+
+    border: 6.4rem solid var(--primary-color);
+
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+/* 고객 섹션 내 슬라이드 항목 스타일 */
+.main_customer .main_customer_slide .itm {
+    padding: 4.8rem;
+    background: var(--background-color);
+    border-radius: 3.2rem;
+}
+
+/* 슬라이드 항목의 이미지 스타일 */
+.main_customer .main_customer_slide .itm figure {
+    height: 24rem;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    margin-bottom: 2.4rem;
+}
+
+/* 슬라이드 항목의 이미지 설정 */
+.main_customer .main_customer_slide .itm img {
+    width: 100%;
+}
+
+/* 슬라이드 항목의 태그 스타일 */
+.main_customer .main_customer_slide .itm em {
+    display: inline-block;
+    padding: 0.8rem 2.4rem;
+    border-radius: 1.6rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    border: 2px solid var(--primary-color);
+
+}
+
+/* 슬라이드 항목의 제목 스타일 */
+.main_customer .main_customer_slide .itm strong {
+    display: block;
+    font-size: 1.9rem;
+    font-weight: 600;
+    line-height: 2.4rem;
+    margin-top: 1.6rem;
+    margin-bottom: 1.6rem;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 메인 콘텐츠 영역 */
+.main_content {
+    position: relative;
+    z-index: 2;
+    padding: 0 0;
+    margin-bottom: -120px;
+}
+
+/* 콘텐츠 내 레이아웃 설정 */
+.main_content .inner {
+    position: relative;
+    gap: 16rem;
+    padding: 5.6rem 5.6rem;
+    background: var(--primary-color);
+    border-radius: 4rem;
+}
+
+/* 콘텐츠 내 구분선 스타일 */
+.main_content .inner::after {
+    content: "";
+    position: absolute;
+    top: 4rem;
+    bottom: 4rem;
+    left: 50%;
+
+    width: 1px;
+
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* 콘텐츠 내 항목 스타일 */
+.main_content .inner>* {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 콘텐츠 내 이미지 스타일 */
+.main_content .inner figure {
+    flex: 0 0 12rem;
+}
+
+/* 콘텐츠 내 제목 스타일 */
+.main_content .inner h3 {
+    color: var(--white-color);
+}
+
+/* 콘텐츠 내 설명 텍스트 스타일 */
+.main_content .inner p {
+    color: var(--white-color);
+}
+
+/* 푸터 스타일 */
+#footer {
+    background: #3a3846;
+    border-radius: 16rem 0 0 0;
+    overflow: hidden;
+}
+
+/* 푸터 상단 배경 이미지 */
+#footer .footer_top {
+    position: relative;
+    height: 67rem;
+    background: url(../images/bg_banner.jpg) no-repeat center bottom/cover;
+}
+
+/* 푸터 상단 슬로건 */
+#footer .footer_top .slg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 4rem));
+}
+
+/* 슬로건 이미지 */
+#footer .footer_top .slg figure {
+    width: 24rem;
+    margin: 0 auto;
+}
+
+/* 푸터 슬로건 텍스트 */
+#footer .footer_top .slg .txt {
+    position: relative;
+    margin-top: 2.4rem;
+    line-height: 3.2rem;
+    font-size: 2.8rem;
+    font-weight: 600;
+    font-family: "Noto Serif KR", serif;
+    white-space: nowrap;
+}
+
+/* 텍스트 애니메이션 (타이핑 효과) */
+#footer .footer_top .slg .txt::after {
+    content: attr(data-txt);
+    color: var(--white-color);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 0;
+    overflow: hidden;
+
+    border-right: 1px solid var(--white-color);
+
+    animation: width 8s steps(24) infinite;
+}
+
+/* 타이핑 애니메이션 */
+@keyframes width {
+    0% {
+        width: 0;
+    }
+
+    50% {
+        width: 100%;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+/* 푸터의 점 애니메이션 */
+#footer .footer_top .dots {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    max-width: 64rem;
+    width: 100%;
+}
+
+#footer .footer_top .dots span {
+    position: absolute;
+
+
+    font-family: "Noto Serif KR", serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--white-color);
+}
+
+/* 점 애니메이션 */
+#footer .footer_top .dots span::after {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    margin-top: 4rem;
+    width: 8px;
+    height: 8px;
+    background: var(--white-color);
+    border-radius: 50%;
+}
+
+/* 점 애니메이션 (커다란 점) */
+#footer .footer_top .dots span::before {
+    content: "";
+
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+
+    transform: translate(-50%, 0) scale(4);
+    opacity: 0.25;
+
+    width: 8px;
+    height: 8px;
+    background: var(--white-color);
+    border-radius: 50%;
+
+    animation: dots 4s infinite;
+}
+
+/* 점 애니메이션 (크기 변경 효과) */
+@keyframes dots {
+    0% {
+        transform: translate(-50%, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, 0) scale(4);
+    }
+
+    100% {
+        transform: translate(-50%, 0) scale(1);
+    }
+}
+
+/* 왼쪽 점의 위치 설정 */
+#footer .footer_top .dots .west {
+    top: -3rem;
+    left: 2rem;
+}
+
+/* 오른쪽 점의 위치 설정 */
+#footer .footer_top .dots .east {
+    top: 8rem;
+    right: 16rem;
+}
+
+/* 푸터 하단 영역 스타일 */
+#footer .footer_bottom {
+    padding: 4rem 0 8rem 0;
+    color: var(--white-color);
+}
+
+/* 푸터 하단 내부 컨텐츠 영역 */
+#footer .footer_bottom .inner {
+    position: relative;
+}
+
+/* 푸터 하단의 정보 영역 */
+#footer .footer_bottom .info {
+    display: flex;
+    gap: 4rem;
+}
+
+/* 푸터 하단의 정보 항목들에 상대 위치 설정 */
+#footer .footer_bottom .info>* {
+    position: relative;
+}
+
+/* 정보 항목들 사이의 구분 선 추가 */
+#footer .footer_bottom .info>*~*::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -2rem;
+
+    transform: translate(-50%, -50%);
+
+    width: 2px;
+    height: 2px;
+    background: var(--line-color);
+
+    border-radius: 50%;
+}
+
+/* 정보 항목들 사이의 구분 선 추가 */
+#footer .footer_bottom p {
+    margin-top: 0.8rem;
+}
+
+/* 푸터 하단의 복사권한 표시 스타일 */
+#footer .footer_bottom .copy {
+    margin-top: 2.4rem;
+    font-size: 1.4rem;
+    font-weight: 300;
+
+    line-height: 1.6rem;
+
+    opacity: 0.5;
+}
+
+/* 푸터 하단의 링크 아이콘 스타일 */
+#footer .footer_bottom .lnk_a {
+    width: 16rem;
+    height: 16rem;
+    background: var(--primary-color);
+}
+
+/* 링크 아이콘 앞에 배경 추가 */
+#footer .footer_bottom .lnk_a::before {
+    background: var(--secondary-color);
+}
